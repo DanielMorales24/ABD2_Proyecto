@@ -1,0 +1,44 @@
+# Requerimientos del Proyecto ETL - Integración de Funcionalidades
+
+## 1. Interfaz Gráfica
+   - La aplicación debe incluir una interfaz gráfica para facilitar el proceso de carga y transformación de datos.
+   - Debe utilizar `tkinter` para la creación de la interfaz.
+
+## 2. Conexión a la Base de Datos
+   - La aplicación debe conectarse a SQL Server mediante `pyodbc`.
+   - La conexión debe ser configurable, permitiendo al usuario ingresar el nombre del servidor y la base de datos.
+   - La aplicación debe guardar las credenciales de conexión en un archivo JSON para facilitar conexiones futuras.
+
+## 3. Carga y Manejo de Archivos Excel
+   - La aplicación debe permitir al usuario seleccionar un archivo Excel (.xlsx) y escoger la hoja de trabajo que desea cargar.
+   - La interfaz debe mostrar una vista previa de los datos cargados en el archivo Excel.
+   - La aplicación debe actualizar la lista de columnas seleccionables de acuerdo con la hoja seleccionada.
+
+## 4. Limpieza de Datos
+   - La aplicación debe realizar un proceso de limpieza de datos antes de las transformaciones, permitiendo configurar políticas de limpieza específicas:
+     - **Política "No Repetidos"**: Verificar y descartar registros que contengan valores duplicados en columnas clave.
+     - **Política "No Nulos"**: Verificar y descartar registros que contengan valores nulos en columnas clave o requeridas.
+   - Las políticas de limpieza deben evaluarse como un conjunto de condiciones lógicas. Si una condición no se cumple, el registro completo se descartará y se añadirá a un archivo `exclusiones.xlsx` para revisión.
+   - La limpieza debe aplicarse antes de la transformación de datos para asegurar que solo los datos válidos pasen a la siguiente fase.
+
+## 5. Transformación de Datos
+   - La aplicación debe incluir opciones para limpiar datos nulos en el archivo Excel antes de cargarlos en SQL Server.
+     - Opciones de limpieza: Eliminar filas con valores nulos, rellenar valores nulos con cero, rellenar valores nulos con una cadena vacía.
+   - Debe permitir al usuario seleccionar solo las columnas deseadas para cargar.
+   - La aplicación debe permitir deshacer cambios para restaurar el DataFrame original.
+
+## 6. Configuración de la Tabla en SQL Server
+   - Antes de cargar los datos, la aplicación debe permitir al usuario configurar los tipos de datos de cada columna.
+   - La aplicación debe crear la tabla en SQL Server con los tipos de datos configurados.
+
+## 7. Carga de Datos en SQL Server
+   - La aplicación debe insertar los datos desde el archivo Excel a la tabla creada en SQL Server.
+   - Debe proporcionar mensajes de confirmación o error según el resultado de la carga de datos.
+
+## 8. Manejo de Errores
+   - La aplicación debe capturar y manejar excepciones para errores de conexión, carga de archivo y carga de datos en SQL Server.
+   - Debe mostrar mensajes de error en la interfaz para informar al usuario sobre cualquier problema.
+
+## 9. Estructura Modular
+   - Las funciones de conexión, carga de datos, limpieza, transformación y configuración de la tabla deben estar estructuradas en archivos independientes para facilitar el mantenimiento y la extensibilidad del código.
+   
